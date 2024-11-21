@@ -27,5 +27,17 @@ public class Cliente {
     public int getCodIdentificador(){
         return codIdentificador;
     }
+    public void setCodIdentificador(int codIdentificador){
+        this.codIdentificador = codIdentificador;
+    }
+    public String getTelefone(){
+        return telefone;
+    }
+    public void setTelefone(String telefone){
+        this.telefone = telefone;
+    }
+    public void setEndereco(String endereço){
+        this.endereço = endereço;
+    }
 
 }
