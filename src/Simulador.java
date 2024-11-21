@@ -4,6 +4,8 @@ public class Simulador {
     private double estimativaEconomia;
     private double custoEstimado;
     private int codIdentificadorSimulador;
+    private static final int irradiacao = 5;
+    private static final double potencialPerda = 0.25;
 
     public double getPotenciaSugerida(){
         return potenciaSugerida;
@@ -36,14 +38,10 @@ public class Simulador {
         this.custoEstimado = custoEstimado;
     }
 
-    public void calcularPotenciaSugerida(){
-
-    }
-    public void calcularEstimativaEconomia(){
-
-    }
-    public void calcularCustoEstimado(){
-
+    public int calcularQuantidadePaineis(PainelSolar painelSolar, double custoMensal) {
+        double energiaPainel = (painelSolar.getPotencia() * irradiacao * (1 - potencialPerda));
+        double res = custoMensal / energiaPainel;
+        return (int) Math.ceil(res);
     }
 
 }

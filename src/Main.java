@@ -181,7 +181,8 @@ public class Main {
             System.out.println("Área do Simulador:");
             System.out.println("1. Cadastrar Simulador");
             System.out.println("2. Visualizar Simuladores");
-            System.out.println("3. Voltar");
+            System.out.println("3. Calcular Quantidade de Painéis");
+            System.out.println("4. Voltar");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
             sc.nextLine(); // Consumir a nova linha
@@ -194,6 +195,9 @@ public class Main {
                     visualizarSimuladores();
                     break;
                 case 3:
+                    calcularQuantidadePaineis();
+                    break;
+                case 4:
                     return;
                 default:
                     System.out.println("Opção inválida!");
@@ -331,6 +335,31 @@ public class Main {
                 System.out.println("-----------------------------");
             }
         }
+    }
+
+
+
+    private static void calcularQuantidadePaineis() {
+        if (simuladores.isEmpty() || paineisSolares.isEmpty()) {
+            System.out.println("Nenhum simulador ou painel solar cadastrado.");
+            return;
+        }
+
+        System.out.print("Digite o índice do painel solar: ");
+        int indicePainel = sc.nextInt();
+        if (indicePainel < 0 || indicePainel >= paineisSolares.size()) {
+            System.out.println("Índice de painel solar inválido.");
+            return;
+        }
+
+        System.out.print("Digite o custo mensal: ");
+        double custoMensal = sc.nextDouble();
+
+        Simulador simulador = simuladores.getFirst();
+        PainelSolar painelSolar = paineisSolares.get(indicePainel);
+
+        int quantidadePaineis = simulador.calcularQuantidadePaineis(painelSolar, custoMensal);
+        System.out.println("Quantidade de painéis necessários: " + quantidadePaineis);
     }
 
     private static void criarRelatorio() {

@@ -3,6 +3,7 @@ public class PainelSolar {
     private int codMedidorPainel;
     private int codCadastro;
     private String modelo;
+    //KWh
     private float potencia;
     private float energiaProduzida;
     private float eficiencia;
