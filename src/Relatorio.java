@@ -5,8 +5,8 @@ public class Relatorio {
     private int codIdentificadorRelatorioFK;
     private int codMedidorRelatorioFK;
     private Date dataRelatorio;
-    private int consumoRelatorio;
-    private int economiaRelatorio;
+    private double consumoRelatorio;
+    private double economiaRelatorio;
     private Cliente_Cadastrado codCadastroRelatorio;
     private Medidor codMedidorRelatorio;
 
@@ -43,16 +43,16 @@ public class Relatorio {
     public void setDataRelatorio(Date dataRelatorio) {
         this.dataRelatorio = dataRelatorio;
     }
-    public int getConsumoRelatorio() {
+    public double getConsumoRelatorio() {
         return consumoRelatorio;
     }
-    public void setConsumoRelatorio(int consumoRelatorio) {
+    public void setConsumoRelatorio(double consumoRelatorio) {
         this.consumoRelatorio = consumoRelatorio;
     }
-    public int getEconomiaRelatorio() {
+    public double getEconomiaRelatorio() {
         return economiaRelatorio;
     }
-    public void setEconomiaRelatorio(int economiaRelatorio) {
+    public void setEconomiaRelatorio(double economiaRelatorio) {
         this.economiaRelatorio = economiaRelatorio;
     }
     public Cliente_Cadastrado getCodCadastroRelatorio() {

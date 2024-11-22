@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Main {
     private static Scanner sc = new Scanner(System.in);
@@ -23,7 +25,7 @@ public class Main {
             System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
-            sc.nextLine(); // Consumir a nova linha
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -60,15 +62,46 @@ public class Main {
         cliente.setConsumoMensal(350.0);
         clientes.add(cliente);
 
-        PainelSolar painel = new PainelSolar();
-        painel.setCodPainel(1);
-        painel.setCodMedidorPainel(1);
-        painel.setCodCadastro(1);
-        painel.setModelo("Modelo A");
-        painel.setPotencia(250.0f);
-        painel.setEnergiaProduzida(500.0f);
-        painel.setEficiencia(0.85f);
-        paineisSolares.add(painel);
+        PainelSolar painel1 = new PainelSolar();
+        painel1.setCodPainel(1);
+        painel1.setCodMedidorPainel(1);
+        painel1.setCodCadastro(1);
+        painel1.setModelo("Modelo A: Casas ate 300 m²");
+        painel1.setPotencia(400.0f);
+        painel1.setEnergiaProduzida(60.0f);
+        painel1.setEficiencia(0.20f);
+        paineisSolares.add(painel1);
+
+        PainelSolar painel2 = new PainelSolar();
+        painel2.setCodPainel(2);
+        painel2.setCodMedidorPainel(2);
+        painel2.setCodCadastro(2);
+        painel2.setModelo("Modelo B: Casas ate 500 m²");
+        painel2.setPotencia(450.0f);
+        painel2.setEnergiaProduzida(67.5f);
+        painel2.setEficiencia(0.22f);
+        paineisSolares.add(painel2);
+
+        PainelSolar painel3 = new PainelSolar();
+        painel3.setCodPainel(3);
+        painel3.setCodMedidorPainel(3);
+        painel3.setCodCadastro(3);
+        painel3.setModelo("Modelo C: Condominios com media de ate 30 apartamentos: ");
+        painel3.setPotencia(500.0f);
+        painel3.setEnergiaProduzida(75.0f);
+        painel3.setEficiencia(0.23f);
+        paineisSolares.add(painel3);
+
+        PainelSolar painel4 = new PainelSolar();
+        painel4.setCodPainel(4);
+        painel4.setCodMedidorPainel(4);
+        painel4.setCodCadastro(4);
+        painel4.setModelo("Modelo C: Condominios com media de ate 50 apartamentos: ");
+        painel4.setPotencia(550.0f);
+        painel4.setEnergiaProduzida(82.5f);
+        painel4.setEficiencia(0.25f);
+        paineisSolares.add(painel4);
+
 
         Medidor medidor = new Medidor();
         medidor.setCodMedidor(1);
@@ -109,7 +142,7 @@ public class Main {
             System.out.println("3. Voltar");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
-            sc.nextLine(); // Consumir a nova linha
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -129,12 +162,12 @@ public class Main {
     private static void menuPainelSolar() {
         while (true) {
             System.out.println("Área do Painel Solar:");
-            System.out.println("1. Cadastrar Painel Solar");
+            System.out.println("1. Cadastrar Novo Painel Solar");
             System.out.println("2. Visualizar Painéis Solares");
             System.out.println("3. Voltar");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
-            sc.nextLine(); // Consumir a nova linha
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -159,7 +192,7 @@ public class Main {
             System.out.println("3. Voltar");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
-            sc.nextLine(); // Consumir a nova linha
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -176,7 +209,7 @@ public class Main {
         }
     }
 
-    private static void menuSimulador() {
+   private static void menuSimulador() {
         while (true) {
             System.out.println("Área do Simulador:");
             System.out.println("1. Cadastrar Simulador");
@@ -213,7 +246,7 @@ public class Main {
             System.out.println("3. Voltar");
             System.out.print("Escolha uma opção: ");
             int opcao = sc.nextInt();
-            sc.nextLine(); // Consumir a nova linha
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -236,9 +269,9 @@ public class Main {
         cliente.setNome(sc.nextLine());
         System.out.print("Email: ");
         cliente.setEmail(sc.nextLine());
-        System.out.print("Consumo Mensal: ");
+        System.out.print("Consumo Mensal em kWh (Ex: 000,00): ");
         cliente.setConsumoMensal(sc.nextDouble());
-        sc.nextLine(); // Consumir a nova linha
+        sc.nextLine();
         clientes.add(cliente);
         System.out.println("Cliente criado com sucesso!");
     }
@@ -250,7 +283,7 @@ public class Main {
             for (Cliente cliente : clientes) {
                 System.out.println("Nome: " + cliente.getNome());
                 System.out.println("Email: " + cliente.getEmail());
-                System.out.println("Consumo Mensal: " + cliente.getConsumoMensal());
+                System.out.println("Consumo Mensal " + cliente.getConsumoMensal() + " kWh");
                 System.out.println("-----------------------------");
             }
         }
@@ -260,26 +293,28 @@ public class Main {
         PainelSolar painel = new PainelSolar();
         System.out.print("Modelo: ");
         painel.setModelo(sc.nextLine());
-        System.out.print("Potência: ");
+        System.out.print("Potência em Watt (Ex: 000,00): ");
         painel.setPotencia(sc.nextFloat());
-        System.out.print("Energia Produzida: ");
+        System.out.print("Energia Produzida em kWh (Ex: 0,00): ");
         painel.setEnergiaProduzida(sc.nextFloat());
-        System.out.print("Eficiência: ");
+        System.out.print("Eficiência (Ex 0,00): ");
         painel.setEficiencia(sc.nextFloat());
-        sc.nextLine(); // Consumir a nova linha
+        sc.nextLine();
         paineisSolares.add(painel);
         System.out.println("Painel Solar criado com sucesso!");
     }
 
     private static void visualizarPaineisSolares() {
+
         if (paineisSolares.isEmpty()) {
             System.out.println("Nenhum painel solar cadastrado.");
         } else {
             for (PainelSolar painel : paineisSolares) {
+                System.out.println("\n");
                 System.out.println("Modelo: " + painel.getModelo());
-                System.out.println("Potência: " + painel.getPotencia());
-                System.out.println("Energia Produzida: " + painel.getEnergiaProduzida());
-                System.out.println("Eficiência: " + painel.getEficiencia());
+                System.out.println("\t•\t Potência: " + painel.getPotencia() + " W");
+                System.out.println("\t•\t Energia Produzida: " + painel.getEnergiaProduzida() + " kWh");
+                System.out.println("\t•\t Eficiência: " + painel.getEficiencia());
                 System.out.println("-----------------------------");
             }
         }
@@ -287,25 +322,39 @@ public class Main {
 
     private static void criarMedidor() {
         Medidor medidor = new Medidor();
+
+
         System.out.print("Modelo: ");
         medidor.setModelo(sc.nextLine());
-        System.out.print("Última Leitura: ");
+        System.out.print("Última Leitura em kWh (Ex:0,000): ");
         medidor.setUltimaLeitura(sc.nextDouble());
-        System.out.print("Data de Leitura (timestamp): ");
-        medidor.setDataLeitura(new Date(sc.nextLong()));
-        sc.nextLine(); // Consumir a nova linha
+        sc.nextLine();
+        System.out.print("Data de Leitura (dd/MM/yyyy): ");
+        String dataString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        sdf.setLenient(false);
+        try {
+            medidor.setDataLeitura(sdf.parse(dataString));
+        } catch (ParseException e) {
+            System.out.println("Data inválida! Use o formato dd/MM/yyyy.");
+            return;
+        }
         medidores.add(medidor);
         System.out.println("Medidor criado com sucesso!");
     }
+
 
     private static void visualizarMedidores() {
         if (medidores.isEmpty()) {
             System.out.println("Nenhum medidor cadastrado.");
         } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
             for (Medidor medidor : medidores) {
                 System.out.println("Modelo: " + medidor.getModelo());
-                System.out.println("Última Leitura: " + medidor.getUltimaLeitura());
-                System.out.println("Data de Leitura: " + medidor.getDataLeitura());
+                System.out.println("Última Leitura: " + medidor.getUltimaLeitura() + " kWh");
+                System.out.println("Data de Leitura: " + sdf.format(medidor.getDataLeitura()));
                 System.out.println("-----------------------------");
             }
         }
@@ -313,13 +362,13 @@ public class Main {
 
     private static void criarSimulador() {
         Simulador simulador = new Simulador();
-        System.out.print("Potência Sugerida: ");
+        System.out.print("Potência Sugerida em Watt: ");
         simulador.setPotenciaSugerida(sc.nextDouble());
         System.out.print("Estimativa de Economia: ");
         simulador.setEstimativaEconomia(sc.nextDouble());
         System.out.print("Custo Estimado: ");
         simulador.setCustoEstimado(sc.nextDouble());
-        sc.nextLine(); // Consumir a nova linha
+        sc.nextLine();
         simuladores.add(simulador);
         System.out.println("Simulador criado com sucesso!");
     }
@@ -337,9 +386,31 @@ public class Main {
         }
     }
 
+    private static void criarRelatorio() {
+        Relatorio relatorio = new Relatorio();
 
 
-    private static void calcularQuantidadePaineis() {
+        System.out.print("Consumo Relatório em kWh (Ex:0,00): ");
+        relatorio.setConsumoRelatorio(sc.nextDouble());
+        System.out.print("Economia Relatório em kWh (Ex:0,00): ");
+        relatorio.setEconomiaRelatorio(sc.nextDouble());
+        sc.nextLine();
+        System.out.print("Data do Relatório (dd/MM/yyyy): ");
+        String dataString = sc.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);
+
+        try {
+            relatorio.setDataRelatorio(sdf.parse(dataString));
+        } catch (ParseException e) {
+            System.out.println("Data inválida! Use o formato dd/MM/yyyy.");
+            return;
+        }
+        relatorios.add(relatorio);
+        System.out.println("Relatório criado com sucesso!");
+    }
+    
+     private static void calcularQuantidadePaineis() {
         if (simuladores.isEmpty() || paineisSolares.isEmpty()) {
             System.out.println("Nenhum simulador ou painel solar cadastrado.");
             return;
@@ -362,29 +433,20 @@ public class Main {
         System.out.println("Quantidade de painéis necessários: " + quantidadePaineis);
     }
 
-    private static void criarRelatorio() {
-        Relatorio relatorio = new Relatorio();
-        System.out.print("Consumo Relatório: ");
-        relatorio.setConsumoRelatorio(sc.nextInt());
-        System.out.print("Economia Relatório: ");
-        relatorio.setEconomiaRelatorio(sc.nextInt());
-        System.out.print("Data do Relatório (timestamp): ");
-        relatorio.setDataRelatorio(new Date(sc.nextLong()));
-        sc.nextLine(); // Consumir a nova linha
-        relatorios.add(relatorio);
-        System.out.println("Relatório criado com sucesso!");
-    }
 
     private static void visualizarRelatorios() {
         if (relatorios.isEmpty()) {
             System.out.println("Nenhum relatório cadastrado.");
         } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             for (Relatorio relatorio : relatorios) {
-                System.out.println("Consumo Relatório: " + relatorio.getConsumoRelatorio());
-                System.out.println("Economia Relatório: " + relatorio.getEconomiaRelatorio());
-                System.out.println("Data do Relatório: " + relatorio.getDataRelatorio());
+                System.out.println("Consumo Relatório: " + relatorio.getConsumoRelatorio() + " kWh");
+                System.out.println("Economia Relatório: " + relatorio.getEconomiaRelatorio() + " kWh");
+                System.out.println("Data do Relatório: " + sdf.format(relatorio.getDataRelatorio()));
                 System.out.println("-----------------------------");
             }
         }
     }
+
+
 }
